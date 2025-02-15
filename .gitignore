@@ -6,5 +6,6 @@ tower_defense
 
 # Other files
 *~
+*.vscode
 #Temporary files
 *.tmp
