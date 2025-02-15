@@ -1,0 +1,10 @@
+# Object files
+*.o
+
+# Executables
+tower_defense
+
+# Other files
+*~
+#Temporary files
+*.tmp

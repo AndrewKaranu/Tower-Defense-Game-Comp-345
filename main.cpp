@@ -2,9 +2,19 @@
 #include "base_tower.h"
 #include "aoe_tower.h"
 #include "critter.h"
+#include "CritterGroupGenerator.h"
 #include <vector>
 #include <iostream>
 
+/**
+ * @brief Tests the functionality of a tower.
+ * 
+ * This function tests the attack, upgrade, and sell functionalities of a tower.
+ * It prints the results of each action to the console.
+ * 
+ * @param tower The tower to be tested.
+ * @param critters A vector of pointers to critters that the tower will attack.
+ */
 void testTower(Tower& tower, std::vector<Critter*>& critters) {
     std::cout << "Initial attack:" << std::endl;
     tower.attack(critters);
@@ -28,13 +38,23 @@ void testTower(Tower& tower, std::vector<Critter*>& critters) {
     std::cout << "Selling tower for " << tower.sell() << " currency" << std::endl;
 }
 
+/**
+ * @brief The main function of the program.
+ * 
+ * This function creates some critters and towers, and tests the towers using the testTower function.
+ * 
+ * @return int Returns 0 upon successful execution.
+ */
 int main() {
-    // Create some critters
-    Critter critter1(1, 100, 10, 5, 1.0, 1);
-    Critter critter2(2, 150, 15, 7, 1.2, 1);
-    Critter critter3(3, 200, 20, 10, 1.5, 1);
+    CritterGroupGenerator generator;
 
-    std::vector<Critter*> critters = { &critter1, &critter2, &critter3 };
+    // Generate critters for wave 1
+    int numCrittersWave1;
+    Critter* wave1 = generator.generateCritters(1, numCrittersWave1);
+    std::vector<Critter*> crittersWave1;
+    for (int i = 0; i < numCrittersWave1; ++i) {
+        crittersWave1.push_back(&wave1[i]);
+    }
 
     // Create towers
     SlowTower slowTower;
@@ -43,28 +63,29 @@ int main() {
 
     // Test SlowTower
     std::cout << "Testing SlowTower:" << std::endl;
-    testTower(slowTower, critters);
+    testTower(slowTower, crittersWave1);
 
     // Reset critters for next test
-    critter1.setHitpoints(100);
-    critter1.setSpeed(1.0);
-    critter2.setHitpoints(150);
-    critter2.setSpeed(1.2);
-    critter3.setHitpoints(200);
-    critter3.setSpeed(1.5);
+    for (Critter* critter : crittersWave1) {
+        critter->setHitpoints(100);
+        critter->setSpeed(1.0);
+    }
 
     // Test BasicTower
     std::cout << "Testing BasicTower:" << std::endl;
-    testTower(basicTower, critters);
+    testTower(basicTower, crittersWave1);
 
     // Reset critters for next test
-    critter1.setHitpoints(100);
-    critter2.setHitpoints(150);
-    critter3.setHitpoints(200);
+    for (Critter* critter : crittersWave1) {
+        critter->setHitpoints(100);
+    }
 
     // Test AoETower
     std::cout << "Testing AoETower:" << std::endl;
-    testTower(aoeTower, critters);
+    testTower(aoeTower, crittersWave1);
+
+    // Clean up dynamically allocated memory
+    delete[] wave1;
 
     return 0;
 }
