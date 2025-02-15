@@ -1,5 +1,6 @@
 #include <iostream>
 #include "map.h"
+using namespace std;
 
 int main() {
     
@@ -42,14 +43,17 @@ int main() {
     myMap.setExit(4, 4);
 
     // Display the map
-    std::cout << "Game Map:\n";
+    cout << "Game Map:\n";
     myMap.displayMap();
 
     // Check map validity
     if (myMap.isValidMap()) {
-        std::cout << "The map is valid!\n";
+        cout << "The map is valid!\n";
+        cout << "P: Critters are allowed to move!\n";
+        cout << "S: Towers can be placed!\n";
+        
     } else {
-        std::cout << "The map is invalid!\n";
+        cout << "The map is invalid!\n";
     }
 
     return 0;
