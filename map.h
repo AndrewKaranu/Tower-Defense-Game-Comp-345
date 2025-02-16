@@ -96,21 +96,59 @@ public:
         }
     }
 
-    void setEntry(int r, int c)
-    {
-        if (r >= 0 && r < rows && c >= 0 && c < cols && grid[r][c] != nullptr && grid[r][c]->getCellType() == PATH)
-        {
-            entryX = r;
-            entryY = c;
+    void setEntry(int r, int c) {
+    if (entryX != -1 && entryY != -1) { 
+        cout << "Error: An entry point already exists at (" << entryX << ", " << entryY << "). Cannot add another entry point.\n";
+        return;
+    }
+    if (grid[r][c] == nullptr) {
+        cout << "Error: Cannot set entry to an empty cell.\n";
+        return;
+    }
+    if (grid[r][c]->getCellType() != PATH) {
+        cout << "Error: Entry must be placed on a PATH cell.\n";
+        return;
+    }
+
+    entryX = r;
+    entryY = c;
+    }
+
+    void removeEntry() {
+        if (entryX != -1 && entryY != -1) {
+            cout << "\nRemoving entry point at (" << entryX << ", " << entryY << ").\n";
+            entryX = -1;
+            entryY = -1;
+        } else {
+            cout << "\nNo entry point to remove.\n";
         }
     }
 
-    void setExit(int r, int c)
-    {
-        if (r >= 0 && r < rows && c >= 0 && c < cols && grid[r][c] != nullptr && grid[r][c]->getCellType() == PATH)
-        {
-            exitX = r;
-            exitY = c;
+    void setExit(int r, int c) {
+    if (exitX != -1 && exitY != -1) {  
+        cout << "Error: An exit point already exists at (" << exitX << ", " << exitY << "). Cannot add another exit point.\n";
+        return;
+    }
+    if (grid[r][c] == nullptr) {
+        cout << "Error: Cannot set exit to an empty cell.\n";
+        return;
+    }
+    if (grid[r][c]->getCellType() != PATH) {
+        cout << "Error: Exit must be placed on a PATH cell.\n";
+        return;
+    }
+
+    exitX = r;
+    exitY = c;
+    }
+
+    void removeExit() {
+        if (exitX != -1 && exitY != -1) {
+            cout << "\nRemoving exit point at (" << exitX << ", " << exitY << ").\n";
+            exitX = -1;
+            exitY = -1;
+        } else {
+            cout << "\nNo exit point to remove.\n";
         }
     }
 
