@@ -2,44 +2,82 @@
 #include <iostream>
 
 // sceneryCell implementations
+/**
+ * @brief Displays the scenery cell.
+ */
 void sceneryCell::display() {
     std::cout << "S";
 }
 
+/**
+ * @brief Gets the type of the cell.
+ * @return The cell type.
+ */
 cellType sceneryCell::getCellType() {
     return SCENERY;
 }
 
+/**
+ * @brief Checks if a tower can be placed on the cell.
+ * @return True if a tower can be placed, false otherwise.
+ */
 bool sceneryCell::canPlaceTower() {
     return true;
 }
 
+/**
+ * @brief Checks if a critter can move on the cell.
+ * @return True if a critter can move, false otherwise.
+ */
 bool sceneryCell::canCritterMove() {
     return false;
 }
 
 // pathCell implementations
+/**
+ * @brief Displays the path cell.
+ */
 void pathCell::display() {
     std::cout << "P";
 }
 
+/**
+ * @brief Gets the type of the cell.
+ * @return The cell type.
+ */
 cellType pathCell::getCellType() {
     return PATH;
 }
 
+/**
+ * @brief Checks if a tower can be placed on the cell.
+ * @return True if a tower can be placed, false otherwise.
+ */
 bool pathCell::canPlaceTower() {
     return false;
 }
 
+/**
+ * @brief Checks if a critter can move on the cell.
+ * @return True if a critter can move, false otherwise.
+ */
 bool pathCell::canCritterMove() {
     return true;
 }
 
 // gameMap implementations
+/**
+ * @brief Constructor for the gameMap class.
+ * @param r The number of rows in the map.
+ * @param c The number of columns in the map.
+ */
 gameMap::gameMap(int r, int c) : rows(r), cols(c) {
     grid.resize(rows, std::vector<Cell*>(cols, nullptr));
 }
 
+/**
+ * @brief Destructor for the gameMap class.
+ */
 gameMap::~gameMap() {
     for (auto& row : grid) {
         for (auto& cell : row) {
@@ -49,6 +87,12 @@ gameMap::~gameMap() {
     }
 }
 
+/**
+ * @brief Sets a cell in the map.
+ * @param r The row of the cell.
+ * @param c The column of the cell.
+ * @param cell The cell to set.
+ */
 void gameMap::setCell(int r, int c, Cell* cell) {
     if (r >= 0 && r < rows && c >= 0 && c < cols) {
         delete grid[r][c];
@@ -56,6 +100,11 @@ void gameMap::setCell(int r, int c, Cell* cell) {
     }
 }
 
+/**
+ * @brief Sets the entry point of the map.
+ * @param r The row of the entry point.
+ * @param c The column of the entry point.
+ */
 void gameMap::setEntry(int r, int c) {
     if (entryX != -1 && entryY != -1) {
         std::cout << "Error: An entry point already exists at (" << entryX << ", " << entryY << "). Cannot add another entry point.\n";
@@ -73,6 +122,9 @@ void gameMap::setEntry(int r, int c) {
     entryY = c;
 }
 
+/**
+ * @brief Removes the entry point of the map.
+ */
 void gameMap::removeEntry() {
     if (entryX != -1 && entryY != -1) {
         std::cout << "\nRemoving entry point at (" << entryX << ", " << entryY << ").\n";
@@ -83,6 +135,11 @@ void gameMap::removeEntry() {
     }
 }
 
+/**
+ * @brief Sets the exit point of the map.
+ * @param r The row of the exit point.
+ * @param c The column of the exit point.
+ */
 void gameMap::setExit(int r, int c) {
     if (exitX != -1 && exitY != -1) {
         std::cout << "Error: An exit point already exists at (" << exitX << ", " << exitY << "). Cannot add another exit point.\n";
@@ -100,6 +157,9 @@ void gameMap::setExit(int r, int c) {
     exitY = c;
 }
 
+/**
+ * @brief Removes the exit point of the map.
+ */
 void gameMap::removeExit() {
     if (exitX != -1 && exitY != -1) {
         std::cout << "\nRemoving exit point at (" << exitX << ", " << exitY << ").\n";
@@ -110,6 +170,12 @@ void gameMap::removeExit() {
     }
 }
 
+/**
+ * @brief Checks if a critter can move to the given cell.
+ * @param r The row of the cell.
+ * @param c The column of the cell.
+ * @return True if a critter can move, false otherwise.
+ */
 bool gameMap::canCritterMove(int r, int c) const {
     if (r >= 0 && r < rows && c >= 0 && c < cols && grid[r][c] != nullptr) {
         return grid[r][c]->canCritterMove();
@@ -117,6 +183,12 @@ bool gameMap::canCritterMove(int r, int c) const {
     return false;
 }
 
+/**
+ * @brief Checks if a tower can be placed on the given cell.
+ * @param r The row of the cell.
+ * @param c The column of the cell.
+ * @return True if a tower can be placed, false otherwise.
+ */
 bool gameMap::canPlaceTower(int r, int c) const {
     if (r >= 0 && r < rows && c >= 0 && c < cols && grid[r][c] != nullptr) {
         return grid[r][c]->canPlaceTower();
@@ -124,6 +196,9 @@ bool gameMap::canPlaceTower(int r, int c) const {
     return false;
 }
 
+/**
+ * @brief Displays the map.
+ */
 void gameMap::displayMap() const {
     for (int i = 0; i < rows; ++i) {
         for (int j = 0; j < cols; ++j) {
@@ -140,6 +215,54 @@ void gameMap::displayMap() const {
     }
 }
 
+/**
+ * @brief Displays the map with the critters on it.
+ * @param critters The critters to display.
+ */
+void gameMap::displayMap(const std::vector<Critter*>& critters) const {
+    // Create a grid to hold the display characters
+    std::vector<std::vector<char>> displayGrid(rows, std::vector<char>(cols, '.'));
+
+    // Fill the grid with the map's base
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            if (i == entryX && j == entryY)
+                displayGrid[i][j] = 'E';
+            else if (i == exitX && j == exitY)
+                displayGrid[i][j] = 'X';
+            else if (grid[i][j]) {
+                if (grid[i][j]->getCellType() == PATH)
+                    displayGrid[i][j] = 'P';
+                else
+                    displayGrid[i][j] = 'S';
+            }
+            else
+                displayGrid[i][j] = '.';
+        }
+    }
+
+    // Overlay the critters onto the grid
+    for (Critter* critter : critters) {
+        int x = static_cast<int>(critter->getX());
+        int y = static_cast<int>(critter->getY());
+        if (x >= 0 && x < rows && y >= 0 && y < cols && critter->isAlive()) {
+            displayGrid[x][y] = 'C'; // 'C' for Critter
+        }
+    }
+
+    // Print the grid
+    for (int i = 0; i < rows; ++i) {
+        for (int j = 0; j < cols; ++j) {
+            std::cout << displayGrid[i][j];
+        }
+        std::cout << "\n";
+    }
+}
+
+/**
+ * @brief Checks if the map is valid.
+ * @return True if the map is valid, false otherwise.
+ */
 bool gameMap::isValidMap() {
     if (entryX == -1 || exitX == -1) {
         return false;
@@ -148,6 +271,13 @@ bool gameMap::isValidMap() {
     return isPathConnected(entryX, entryY, visited);
 }
 
+/**
+ * @brief Checks if the path is connected.
+ * @param x The x coordinate of the current cell.
+ * @param y The y coordinate of the current cell.
+ * @param visited The visited cells.
+ * @return True if the path is connected, false otherwise.
+ */
 bool gameMap::isPathConnected(int x, int y, std::vector<std::vector<bool>>& visited) {
     if (x == exitX && y == exitY) {
         return true;

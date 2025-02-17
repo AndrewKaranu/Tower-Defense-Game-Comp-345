@@ -15,9 +15,9 @@ void testTower(Tower& tower, std::vector<Critter*>& critters) {
     std::cout << "Initial attack:" << std::endl;
     tower.attack(critters);
     for (Critter* c : critters) {
-        std::cout << "Critter " << c->getId() 
-                  << " hitpoints: " << c->getHitpoints() 
-                  << ", speed: " << c->getSpeed() 
+        std::cout << "Critter " << c->getId()
+                  << " hitpoints: " << c->getHitpoints()
+                  << ", speed: " << c->getSpeed()
                   << std::endl;
     }
 
@@ -31,9 +31,9 @@ void testTower(Tower& tower, std::vector<Critter*>& critters) {
     std::cout << "Attack after upgrade:" << std::endl;
     tower.attack(critters);
     for (Critter* c : critters) {
-        std::cout << "Critter " << c->getId() 
-                  << " hitpoints: " << c->getHitpoints() 
-                  << ", speed: " << c->getSpeed() 
+        std::cout << "Critter " << c->getId()
+                  << " hitpoints: " << c->getHitpoints()
+                  << ", speed: " << c->getSpeed()
                   << std::endl;
     }
 
@@ -91,19 +91,19 @@ void checkValidMap() {
 
     // Checking movement and tower placement
     std::cout << "\nCritter movement check:\n";
-    std::cout << "(0,0) Path => " 
-              << (myMap1.canCritterMove(0, 0) ? "YES" : "NO") 
+    std::cout << "(0,0) Path => "
+              << (myMap1.canCritterMove(0, 0) ? "YES" : "NO")
               << std::endl;
-    std::cout << "(1,1) Scenery => " 
-              << (myMap1.canCritterMove(1, 1) ? "YES" : "NO") 
+    std::cout << "(1,1) Scenery => "
+              << (myMap1.canCritterMove(1, 1) ? "YES" : "NO")
               << std::endl;
 
     std::cout << "\nTower placement check:\n";
-    std::cout << "(0,1) Path => " 
-              << (myMap1.canPlaceTower(0, 1) ? "YES" : "NO") 
+    std::cout << "(0,1) Path => "
+              << (myMap1.canPlaceTower(0, 1) ? "YES" : "NO")
               << std::endl;
-    std::cout << "(1,1) Scenery => " 
-              << (myMap1.canPlaceTower(1, 1) ? "YES" : "NO") 
+    std::cout << "(1,1) Scenery => "
+              << (myMap1.canPlaceTower(1, 1) ? "YES" : "NO")
               << std::endl;
 }
 
@@ -211,29 +211,44 @@ void demoCritters() {
     std::cout << "\n--- Critter Demonstration ---\n";
 
     CritterGroupGenerator generator;
-    int numCritters = 0;
-    Critter* wave = generator.generateCritters(1, numCritters); // wave #1 example
-    Critter* wave = generator.generateCritters(2, numCritters); // wave #2 example
+    int numCrittersWave1 = 0;
+    Critter* wave1 = generator.generateCritters(1, numCrittersWave1); // wave #1 example
 
-    
-    
-
-    std::vector<Critter*> critters;
-    for(int i = 0; i < numCritters; i++) {
-        critters.push_back(&wave[i]);
+    std::vector<Critter*> crittersWave1;
+    for (int i = 0; i < numCrittersWave1; i++) {
+        crittersWave1.push_back(&wave1[i]);
     }
 
-    std::cout << "Created " << numCritters << " critters.\n";
-    for(Critter* c : critters) {
-        std::cout << "Critter " << c->getId() 
+    std::cout << "Created " << numCrittersWave1 << " critters for Wave 1.\n";
+    for (Critter* c : crittersWave1) {
+        std::cout << "Critter " << c->getId()
                   << " HP: " << c->getHitpoints()
                   << " Speed: " << c->getSpeed()
                   << " Level: " << c->getLevel()
                   << std::endl;
-        c->move(); // Show movement text
+        // c->move(); // Show movement text
     }
 
-    delete[] wave;
+    int numCrittersWave2 = 0;
+    Critter* wave2 = generator.generateCritters(2, numCrittersWave2); // wave #2 example
+
+    std::vector<Critter*> crittersWave2;
+    for (int i = 0; i < numCrittersWave2; i++) {
+        crittersWave2.push_back(&wave2[i]);
+    }
+
+    std::cout << "Created " << numCrittersWave2 << " critters for Wave 2.\n";
+    for (Critter* c : crittersWave2) {
+        std::cout << "Critter " << c->getId()
+                  << " HP: " << c->getHitpoints()
+                  << " Speed: " << c->getSpeed()
+                  << " Level: " << c->getLevel()
+                  << std::endl;
+        // c->move(); // Show movement text
+    }
+
+    delete[] wave1;
+    delete[] wave2;
 }
 
 /**
@@ -281,16 +296,96 @@ void demoTowers() {
 }
 
 /**
+ * @brief Demonstrates critter and map interaction.
+ */
+void demoCritterMapInteraction() {
+    std::cout << "\n--- Critter and Map Interaction Demonstration ---\n";
+
+    // Create a sample map (you can customize this)
+    gameMap myMap(5, 5);
+    myMap.setCell(0, 0, new pathCell());
+    myMap.setCell(0, 1, new pathCell());
+    myMap.setCell(0, 2, new pathCell());
+    myMap.setCell(0, 3, new pathCell());
+    myMap.setCell(0, 4, new pathCell());
+    myMap.setCell(1, 0, new pathCell());
+    myMap.setCell(1, 1, new sceneryCell());
+    myMap.setCell(1, 2, new pathCell());
+    myMap.setCell(1, 3, new sceneryCell());
+    myMap.setCell(1, 4, new pathCell());
+    myMap.setCell(2, 0, new pathCell());
+    myMap.setCell(2, 1, new sceneryCell());
+    myMap.setCell(2, 2, new pathCell());
+    myMap.setCell(2, 3, new pathCell());
+    myMap.setCell(2, 4, new sceneryCell());
+    myMap.setCell(3, 0, new pathCell());
+    myMap.setCell(3, 1, new sceneryCell());
+    myMap.setCell(3, 2, new pathCell());
+    myMap.setCell(3, 3, new pathCell());
+    myMap.setCell(3, 4, new pathCell());
+    myMap.setCell(4, 0, new sceneryCell());
+    myMap.setCell(4, 1, new sceneryCell());
+    myMap.setCell(4, 2, new sceneryCell());
+    myMap.setCell(4, 3, new sceneryCell());
+    myMap.setCell(4, 4, new pathCell());
+    myMap.setEntry(0, 0);
+    myMap.setExit(4, 4);
+
+    // Generate a single critter at the entry point
+    CritterGroupGenerator generator;
+    int numCritters = 0;
+    Critter* critter = generator.generateCritters(1, numCritters, myMap.getEntryX(), myMap.getEntryY());
+
+    if (critter == nullptr) {
+        std::cout << "Failed to generate critter.\n";
+        return;
+    }
+
+    std::cout << "Initial map:\n";
+    std::vector<Critter*> critters;
+    critters.push_back(critter);
+    myMap.displayMap(critters);
+
+    // Simulate critter movement
+    int steps = 10;
+    bool reachedExit = false; // Flag to track if the critter reached the exit
+    for (int i = 0; i < steps; ++i) {
+        std::cout << "\nAfter step " << i + 1 << ":\n";
+        if (critter->isAlive() && !reachedExit) {
+            critter->move(myMap);
+
+            // Check if the critter has reached the exit
+            if (critter->getX() == myMap.getExitX() && critter->getY() == myMap.getExitY()) {
+                std::cout << "Critter " << critter->getId() << " has reached the exit!\n";
+                reachedExit = true;
+            }
+        } else if (!critter->isAlive()) {
+            std::cout << "Critter " << critter->getId() << " is dead!\n";
+            break;
+        } else {
+            // Critter already reached the exit, no need to move it further
+            std::cout << "Critter " << critter->getId() << " is at the exit.\n";
+        }
+        myMap.displayMap(critters);
+    }
+
+    delete critter;
+}
+
+/**
  * @brief Main function with a simple menu to demonstrate maps, critters, and towers separately.
  */
 int main() {
     while (true) {
-        std::cout 
+        std::cout
+            << "\n      === WELCOME TO ===\n"
+            << "\n=== Tower Defense Game Test ===\n"
             << "\n=== Main Menu ===\n"
-            << "1) Demonstrate Maps\n"
-            << "2) Demonstrate Critters\n"
-            << "3) Demonstrate Towers\n"
-            << "4) Exit\n"
+            << "1) Demonstrate Maps Generation\n"
+            << "2) Demonstrate Critters Generation\n"
+            << "3) Demonstrate Towers and Critters Interactions\n"
+            << "4) Demonstrate Critter and Map Interaction\n"
+            << "5) Exit\n"
             << "Choice: ";
 
         int choice;
@@ -307,6 +402,9 @@ int main() {
                 demoTowers();
                 break;
             case 4:
+                demoCritterMapInteraction();
+                break;
+            case 5:
                 std::cout << "Exiting...\n";
                 return 0;
             default:

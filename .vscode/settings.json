@@ -67,6 +67,10 @@
         "random": "cpp",
         "utility": "cpp",
         "text_encoding": "cpp",
-        "thread": "cpp"
+        "thread": "cpp",
+        "deque": "cpp",
+        "unordered_map": "cpp",
+        "numeric": "cpp",
+        "numbers": "cpp"
     }
 }

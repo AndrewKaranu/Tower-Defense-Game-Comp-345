@@ -23,7 +23,7 @@ BasicTower::BasicTower() {
  */
 void BasicTower::attack(std::vector<Critter*>& targets) {
     for(Critter* c : targets) {
-        if(isInRange(0, 0, c->getX(), c->getY())) { // Assume tower position at (0,0)
+        if(isInRange(0, 0, c->getX(), c->getY())) { // For now ssume tower position at (0,0)
             c->takeDamage(levels[currentLevel].power);
             break; 
         }

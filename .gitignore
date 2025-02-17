@@ -2,10 +2,12 @@
 *.o
 
 # Executables
-tower_defense
+as1_driver
 
 # Other files
 *~
 *.vscode
+.vscode
+
 #Temporary files
 *.tmp
