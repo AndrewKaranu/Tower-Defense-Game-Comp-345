@@ -1,12 +1,11 @@
-//
-// Created by arash shafiee on 2025-02-11.
-//
 
 #ifndef CRITTER_H
 #define CRITTER_H
 
 
-class Critter {
+#include "Observable.h"
+
+class Critter : public Observable {
 private:
     int id;
     int hitpoints;
@@ -38,6 +37,8 @@ public:
     bool isAlive() const;
 
     void move();
+
+    void notifyObservers() override;
 };
 
 
