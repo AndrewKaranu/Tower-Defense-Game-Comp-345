@@ -1,9 +1,9 @@
-//
-// Created by arash shafiee on 2025-02-11.
-//
 
 #include "Critter.h"
 #include <iostream>
+#include "Observer.h"
+#include "Observable.h"
+
 using namespace std;
 
 Critter::Critter() : id(0), hitpoints(0), reward(0), strength(0), speed(0.0), level(0) {}
@@ -18,16 +18,17 @@ int Critter::getStrength() const {return strength;}
 double Critter::getSpeed() const {return speed;}
 int Critter::getLevel() const {return level;}
 
-void Critter::setId(int id) {this->id = id;}
-void Critter::setHitpoints(int hitPoints) {this->hitpoints = hitPoints;}
-void Critter::setReward(int reward) {this->reward = reward;}
-void Critter::setStrength(int strength) {this->strength = strength;}
-void Critter::setSpeed(double speed) {this->speed = speed;}
-void Critter::setLevel(int level) {this->level = level;}
+void Critter::setId(int id) {this->id = id;notifyObservers();}
+void Critter::setHitpoints(int hitPoints) {this->hitpoints = hitPoints;notifyObservers();}
+void Critter::setReward(int reward) {this->reward = reward;notifyObservers();}
+void Critter::setStrength(int strength) {this->strength = strength;notifyObservers();}
+void Critter::setSpeed(double speed) {this->speed = speed;notifyObservers();}
+void Critter::setLevel(int level) {this->level = level;notifyObservers();}
 
 void Critter::takeDamage(int damage) {
     hitpoints -= damage;
     if (hitpoints < 0) hitpoints = 0;
+    notifyObservers();
 }
 
 bool Critter::isAlive() const {
@@ -36,4 +37,22 @@ bool Critter::isAlive() const {
 
 void Critter::move() {
     cout << "Critter #" << id << "is moving at the speed of " << speed <<" towards the exit!" << endl;
+    notifyObservers();
+}
+
+void Observable::addObserver(Observer* observer) {
+    observers.push_back(observer);
+}
+
+void Observable::removeObserver(Observer* observer) {
+    auto it = std::find(observers.begin(), observers.end(), observer);
+    if (it != observers.end()) {
+        observers.erase(it);
+    }
+}
+
+void Critter::notifyObservers() {
+    for (auto observer : observers) {
+        observer->update(this);
+    }
 }
