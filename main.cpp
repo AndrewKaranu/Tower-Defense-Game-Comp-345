@@ -5,6 +5,11 @@
 #include "CritterGroupGenerator.h"
 #include <vector>
 #include <iostream>
+#include <SFML/Graphics.hpp>
+#include "CritterGroup.h"
+#include "CritterObserver.h"
+#include "CritterGroupObserver.h"
+#include "CritterGroupGenerator.h"
 
 /**
  * @brief Tests the functionality of a tower.
@@ -46,7 +51,9 @@ void testTower(Tower& tower, std::vector<Critter*>& critters) {
  * @return int Returns 0 upon successful execution.
  */
 int main() {
-    CritterGroupGenerator generator;
+
+    /**
+     * CritterGroupGenerator generator;
 
     // Generate critters for wave 1
     int numCrittersWave1;
@@ -88,4 +95,10 @@ int main() {
     delete[] wave1;
 
     return 0;
+     *
+     * */
+
+
+
+
 }
