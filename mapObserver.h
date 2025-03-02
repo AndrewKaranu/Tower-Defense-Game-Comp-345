@@ -2,7 +2,8 @@
 #define MAPOBSERVER_H
 
 #include <iostream>
-#include "map.h"  
+#include "map.h"
+#include <SFML/Graphics.hpp>  
 
 // Abstract Observer class
 class Observer {
@@ -25,6 +26,15 @@ class ConsoleMapObserver : public MapObserver {
 public:
     ConsoleMapObserver(const gameMap* map);
     void update() override;  // Method to update and display the map
+};
+
+class GuiMapObserver : public MapObserver {
+private:
+    sf::RenderWindow window;
+
+public:
+    GuiMapObserver(const gameMap* map);
+    void update();
 };
 
 #endif
