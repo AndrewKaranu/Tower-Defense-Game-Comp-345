@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include <iostream>
+#include "Observable.h" // Added for Observer pattern
 
 /**
  * @brief Represents the statistics for a specific level of a tower.
@@ -20,10 +21,12 @@ class Critter;
  * 
  * Defines the core functionality and attributes of a tower, including attacking, upgrading, and selling.
  */
-class Tower {
+class Tower : public Observable { // Inherit from Observable
 protected:
     size_t currentLevel;                  ///< The current level of the tower.
     std::vector<LevelStats> levels;       ///< A vector containing the statistics for each level of the tower.
+    int posX = 0;                         ///< X position of the tower
+    int posY = 0;                         ///< Y position of the tower
     
 public:
     /**
@@ -55,6 +58,29 @@ public:
      */
     float sell() const;
     
+    // Position setters and getters
+    /**
+     * @brief Sets the position of the tower.
+     * 
+     * @param x The x-coordinate of the tower.
+     * @param y The y-coordinate of the tower.
+     */
+    void setPosition(int x, int y);
+    
+    /**
+     * @brief Gets the x-coordinate of the tower.
+     * 
+     * @return The x-coordinate of the tower.
+     */
+    int getPositionX() const;
+    
+    /**
+     * @brief Gets the y-coordinate of the tower.
+     * 
+     * @return The y-coordinate of the tower.
+     */
+    int getPositionY() const;
+    
     // Getters
     /**
      * @brief Gets a property of the tower.
@@ -65,6 +91,8 @@ public:
     float getPower() const;
     size_t getLevel() const;
     float getFireRate() const;
+    float getBuyCost() const;
+    float getRefundValue() const;
 
     // Helper
     /**
