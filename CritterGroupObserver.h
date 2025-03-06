@@ -1,16 +1,14 @@
-// CritterGroupObserver.h
 #pragma once
 #include "Observer.h"
 #include "CritterGroup.h"
-#include <SFML/Graphics.hpp>
+#include "CritterGroupObserver.h"
+#include <string>
 
 class CritterGroupObserver : public Observer {
 private:
-    sf::RenderWindow* window;
-    sf::Font font;
+    std::string name;
 
 public:
-    CritterGroupObserver(sf::RenderWindow* window);
+    CritterGroupObserver(const std::string& name);
     void update(Observable* observable) override;
-    void draw(const CritterGroup* critterGroup);
 };

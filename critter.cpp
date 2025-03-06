@@ -3,6 +3,9 @@
 #include <iostream>
 #include "map.h"
 #include <cmath>
+#include "Observable.h"
+#include "Observer.h"
+
 using namespace std;
 
 /**
@@ -35,6 +38,13 @@ int Critter::getLevel() const {return level;}
 float Critter::getX() const { return x; }
 float Critter::getY() const { return y; }
 
+
+void Critter::notifyObservers() {
+    for(auto observer : observers) {
+        observer->update(this);
+    }
+}
+
 /**
  * @brief Sets the properties of the critter.
  * @param id The ID of the critter.
@@ -44,12 +54,12 @@ float Critter::getY() const { return y; }
  * @param speed The speed of the critter.
  * @param level The level of the critter.
  */
-void Critter::setId(int id) {this->id = id;}
-void Critter::setHitpoints(int hitPoints) {this->hitpoints = hitPoints;}
-void Critter::setReward(int reward) {this->reward = reward;}
-void Critter::setStrength(int strength) {this->strength = strength;}
-void Critter::setSpeed(double speed) {this->speed = speed;}
-void Critter::setLevel(int level) {this->level = level;}
+void Critter::setId(int id) {this->id = id;notifyObservers();}
+void Critter::setHitpoints(int hitPoints) {this->hitpoints = hitPoints;notifyObservers();}
+void Critter::setReward(int reward) {this->reward = reward;notifyObservers();}
+void Critter::setStrength(int strength) {this->strength = strength;notifyObservers();}
+void Critter::setSpeed(double speed) {this->speed = speed;notifyObservers();}
+void Critter::setLevel(int level) {this->level = level;notifyObservers();}
 /**
  * @brief Sets the position of the critter.
  * @param newX The new X position.
@@ -58,6 +68,7 @@ void Critter::setLevel(int level) {this->level = level;}
 void Critter::setPosition(float newX, float newY) {
     x = newX;
     y = newY;
+    notifyObservers();
 }
 
 /**
@@ -67,6 +78,7 @@ void Critter::setPosition(float newX, float newY) {
 void Critter::takeDamage(int damage) {
     hitpoints -= damage;
     if (hitpoints < 0) hitpoints = 0;
+    notifyObservers();
 }
 
 /**
@@ -120,4 +132,6 @@ void Critter::move(gameMap& map) {
     }
 
     cout << "Critter #" << id << " moving to (" << x << ", " << y << ")" << endl;
+
+    notifyObservers();
 }

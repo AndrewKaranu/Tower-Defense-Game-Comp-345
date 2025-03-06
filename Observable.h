@@ -1,31 +1,25 @@
-// Observable.h
 #pragma once
 #include <vector>
 #include <algorithm>
-#include "Observer.h"
+
+class Observer;
 
 class Observable {
-private:
-    std::vector<Observer*> observers;
-
 protected:
-    void notifyObservers() {
-        for(Observer* observer : observers) {
-            observer->update();
-        }
-    }
-
+    std::vector<Observer*> observers;
 public:
-    virtual ~Observable() = default;
-    
-    void addObserver(Observer* observer) {
+    virtual void addObserver(Observer* observer) {
         observers.push_back(observer);
     }
 
-    void removeObserver(Observer* observer) {
-        observers.erase(
-            std::remove(observers.begin(), observers.end(), observer),
-            observers.end()
-        );
+    virtual void removeObserver(Observer* observer) {
+        auto it = std::find(observers.begin(), observers.end(), observer);
+        if (it != observers.end()) {
+            observers.erase(it);
+        }
     }
+
+    virtual void notifyObservers() = 0;
+
+    virtual ~Observable() = default; // a destructor
 };

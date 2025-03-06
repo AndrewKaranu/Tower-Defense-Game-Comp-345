@@ -1,43 +1,18 @@
 #include "CritterObserver.h"
-#include <sstream>
-
-CritterObserver::CritterObserver(sf::RenderWindow* window) : window(window) {
-    // Load font
-    if (!font.loadFromFile("arial.ttf")) {
-
-    }
-
-    // Setup critter representation
-    critterShape.setRadius(10.f);
-    critterShape.setFillColor(sf::Color::Red);
-
-    // Setup text for critter info
-    critterInfo.setFont(font);
-    critterInfo.setCharacterSize(12);
-    critterInfo.setFillColor(sf::Color::White);
+#include <iostream>
+using namespace std;
+CritterObserver::CritterObserver(const std::string& name) : name(name) {
 }
 
 void CritterObserver::update(Observable* observable) {
     Critter* critter = static_cast<Critter*>(observable);
 
-    // Update position of the shape
-    critterShape.setPosition(critter->getX() * 30, critter->getY() * 30); // Scale position
-
-    // Update text information
-    std::stringstream ss;
-    ss << "ID: " << critter->getId() << "\n"
-       << "HP: " << critter->getHitpoints() << "\n"
-       << "Level: " << critter->getLevel();
-    critterInfo.setString(ss.str());
-    critterInfo.setPosition(critter->getX() * 30, critter->getY() * 30 - 30);
-
-    // Redraw the observer view
-    draw();
-}
-
-void CritterObserver::draw() {
-    if (window->isOpen()) {
-        window->draw(critterShape);
-        window->draw(critterInfo);
-    }
+    cout << "Observer " << name << " received update for Critter #" << critter->getId() << ":" << endl;
+    cout << "  Position: (" << critter->getX() << ", " << critter->getY() << ")" << endl;
+    cout << "  Hitpoints: " << critter->getHitpoints() << endl;
+    cout << "  Level: " << critter->getLevel() << endl;
+    cout << "  Speed: " << critter->getSpeed() << endl;
+    cout << "  Strength: " << critter->getStrength() << endl;
+    cout << "  Reward: " << critter->getReward() << endl;
+    cout << std::endl;
 }

@@ -1,12 +1,15 @@
 #ifndef CRITTER_H
 #define CRITTER_H
 
+#include "Observable.h"
+#include "map.h"
+
 class gameMap;
 
 /**
  * @brief Represents a Critter in the game.
  */
-class Critter {
+class Critter : public Observable {
 private:
     int id;
     int hitpoints;
@@ -93,6 +96,8 @@ public:
      * @param newY The new Y position.
      */
     void setPosition(float newX, float newY);
+
+    void notifyObservers() override; // Observable method was implemented
 };
 
 
