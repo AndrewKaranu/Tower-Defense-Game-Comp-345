@@ -1,0 +1,9 @@
+C:/Users/user/Desktop/Uni/Year 2 Sem 2/COMP 345/Project/AS2/Tower_Defense_AMMA/build/Desktop_Qt_6_8_2_MinGW_64_bit-Debug/CMakeFiles/Tower_Defense_AMMA.dir
+C:/Users/user/Desktop/Uni/Year 2 Sem 2/COMP 345/Project/AS2/Tower_Defense_AMMA/build/Desktop_Qt_6_8_2_MinGW_64_bit-Debug/CMakeFiles/edit_cache.dir
+C:/Users/user/Desktop/Uni/Year 2 Sem 2/COMP 345/Project/AS2/Tower_Defense_AMMA/build/Desktop_Qt_6_8_2_MinGW_64_bit-Debug/CMakeFiles/rebuild_cache.dir
+C:/Users/user/Desktop/Uni/Year 2 Sem 2/COMP 345/Project/AS2/Tower_Defense_AMMA/build/Desktop_Qt_6_8_2_MinGW_64_bit-Debug/CMakeFiles/list_install_components.dir
+C:/Users/user/Desktop/Uni/Year 2 Sem 2/COMP 345/Project/AS2/Tower_Defense_AMMA/build/Desktop_Qt_6_8_2_MinGW_64_bit-Debug/CMakeFiles/install.dir
+C:/Users/user/Desktop/Uni/Year 2 Sem 2/COMP 345/Project/AS2/Tower_Defense_AMMA/build/Desktop_Qt_6_8_2_MinGW_64_bit-Debug/CMakeFiles/install/local.dir
+C:/Users/user/Desktop/Uni/Year 2 Sem 2/COMP 345/Project/AS2/Tower_Defense_AMMA/build/Desktop_Qt_6_8_2_MinGW_64_bit-Debug/CMakeFiles/install/strip.dir
+C:/Users/user/Desktop/Uni/Year 2 Sem 2/COMP 345/Project/AS2/Tower_Defense_AMMA/build/Desktop_Qt_6_8_2_MinGW_64_bit-Debug/CMakeFiles/Tower_Defense_AMMA_autogen_timestamp_deps.dir
+C:/Users/user/Desktop/Uni/Year 2 Sem 2/COMP 345/Project/AS2/Tower_Defense_AMMA/build/Desktop_Qt_6_8_2_MinGW_64_bit-Debug/CMakeFiles/Tower_Defense_AMMA_autogen.dir

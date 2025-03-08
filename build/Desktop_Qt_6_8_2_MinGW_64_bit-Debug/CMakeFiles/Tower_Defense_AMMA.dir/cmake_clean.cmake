@@ -1,0 +1,40 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/Tower_Defense_AMMA_autogen.dir/AutogenUsed.txt"
+  "CMakeFiles/Tower_Defense_AMMA_autogen.dir/ParseCache.txt"
+  "Tower_Defense_AMMA_autogen"
+  "CMakeFiles/Tower_Defense_AMMA.dir/CritterGroupGenerator.cpp.obj"
+  "CMakeFiles/Tower_Defense_AMMA.dir/CritterGroupGenerator.cpp.obj.d"
+  "CMakeFiles/Tower_Defense_AMMA.dir/GameManager.cpp.obj"
+  "CMakeFiles/Tower_Defense_AMMA.dir/GameManager.cpp.obj.d"
+  "CMakeFiles/Tower_Defense_AMMA.dir/Tower_Defense_AMMA_autogen/mocs_compilation.cpp.obj"
+  "CMakeFiles/Tower_Defense_AMMA.dir/Tower_Defense_AMMA_autogen/mocs_compilation.cpp.obj.d"
+  "CMakeFiles/Tower_Defense_AMMA.dir/aoe_tower.cpp.obj"
+  "CMakeFiles/Tower_Defense_AMMA.dir/aoe_tower.cpp.obj.d"
+  "CMakeFiles/Tower_Defense_AMMA.dir/base_tower.cpp.obj"
+  "CMakeFiles/Tower_Defense_AMMA.dir/base_tower.cpp.obj.d"
+  "CMakeFiles/Tower_Defense_AMMA.dir/critter.cpp.obj"
+  "CMakeFiles/Tower_Defense_AMMA.dir/critter.cpp.obj.d"
+  "CMakeFiles/Tower_Defense_AMMA.dir/gameview.cpp.obj"
+  "CMakeFiles/Tower_Defense_AMMA.dir/gameview.cpp.obj.d"
+  "CMakeFiles/Tower_Defense_AMMA.dir/main.cpp.obj"
+  "CMakeFiles/Tower_Defense_AMMA.dir/main.cpp.obj.d"
+  "CMakeFiles/Tower_Defense_AMMA.dir/mainwindow.cpp.obj"
+  "CMakeFiles/Tower_Defense_AMMA.dir/mainwindow.cpp.obj.d"
+  "CMakeFiles/Tower_Defense_AMMA.dir/map.cpp.obj"
+  "CMakeFiles/Tower_Defense_AMMA.dir/map.cpp.obj.d"
+  "CMakeFiles/Tower_Defense_AMMA.dir/slow_tower.cpp.obj"
+  "CMakeFiles/Tower_Defense_AMMA.dir/slow_tower.cpp.obj.d"
+  "CMakeFiles/Tower_Defense_AMMA.dir/tower.cpp.obj"
+  "CMakeFiles/Tower_Defense_AMMA.dir/tower.cpp.obj.d"
+  "Tower_Defense_AMMA.exe"
+  "Tower_Defense_AMMA.exe.manifest"
+  "Tower_Defense_AMMA.pdb"
+  "Tower_Defense_AMMA_autogen/mocs_compilation.cpp"
+  "Tower_Defense_AMMA_autogen/timestamp"
+  "libTower_Defense_AMMA.dll.a"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/Tower_Defense_AMMA.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

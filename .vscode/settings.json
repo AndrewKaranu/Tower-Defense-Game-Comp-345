@@ -1,0 +1,18 @@
+{
+    "files.associations": {
+        ".gitignore.genai": "ignore",
+        "ostream": "cpp",
+        "iostream": "cpp",
+        "xiosbase": "cpp",
+        "format": "cpp",
+        "map": "cpp",
+        "atomic": "cpp",
+        "ios": "cpp",
+        "system_error": "cpp",
+        "vector": "cpp",
+        "xstring": "cpp",
+        "xtree": "cpp",
+        "xlocinfo": "cpp",
+        "xutility": "cpp"
+    }
+}

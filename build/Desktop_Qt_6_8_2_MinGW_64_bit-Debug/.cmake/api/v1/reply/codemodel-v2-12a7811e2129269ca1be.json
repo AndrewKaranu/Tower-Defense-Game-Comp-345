@@ -1,0 +1,79 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Debug-bbb8690c9c5d1902671b.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "Tower_Defense_AMMA",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "Tower_Defense_AMMA::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Tower_Defense_AMMA-Debug-f042d3b65ef78458e16a.json",
+					"name" : "Tower_Defense_AMMA",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Tower_Defense_AMMA_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Tower_Defense_AMMA_autogen-Debug-975811de4951d3aead41.json",
+					"name" : "Tower_Defense_AMMA_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "Tower_Defense_AMMA_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-Tower_Defense_AMMA_autogen_timestamp_deps-Debug-1283a0c2101f55d43439.json",
+					"name" : "Tower_Defense_AMMA_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/user/Desktop/Uni/Year 2 Sem 2/COMP 345/Project/AS2/Tower_Defense_AMMA/build/Desktop_Qt_6_8_2_MinGW_64_bit-Debug",
+		"source" : "C:/Users/user/Desktop/Uni/Year 2 Sem 2/COMP 345/Project/AS2/Tower_Defense_AMMA"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}
