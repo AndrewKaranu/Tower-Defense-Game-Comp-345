@@ -2,6 +2,8 @@
 #define CRITTERGROUPGENERATOR_H
 
 #include "critter.h"
+#include "CritterFactory.h"
+#include <vector> // vector was added
 
 /**
  * @brief Class responsible for generating groups of critters for each wave.
@@ -10,6 +12,10 @@ class CritterGroupGenerator {
 private:
     int waveNumber;
     int nextCritterId;
+
+    // Factory method to create a critter based on wave number
+    std::vector<CritterFactory*> factories;
+
 public:
     /**
      * @brief Default constructor for the CritterGroupGenerator class.

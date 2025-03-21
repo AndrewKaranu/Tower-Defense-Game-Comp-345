@@ -1,15 +1,26 @@
 #include "CritterGroupGenerator.h"
-#include <cstdlib>
+#include "EasyCritterFactory.h"
+#include "MediumCritterFactory.h"
+#include "HardCritterFactory.h"
 
 /**
  * @brief Default constructor for the CritterGroupGenerator class.
  */
-CritterGroupGenerator::CritterGroupGenerator() : waveNumber(1), nextCritterId(1) {}
+CritterGroupGenerator::CritterGroupGenerator() : waveNumber(1), nextCritterId(1) {
+    factories.push_back(new EasyCritterFactory());
+    factories.push_back(new MediumCritterFactory());
+    factories.push_back(new HardCritterFactory());
+}
 
 /**
  * @brief Destructor for the CritterGroupGenerator class.
  */
-CritterGroupGenerator::~CritterGroupGenerator() {}
+CritterGroupGenerator::~CritterGroupGenerator() {
+    // Cleaning up factories
+    for (auto factory : factories) {
+        delete factory;
+    }
+}
 
 /**
  * @brief Generates an array of critters for a given wave number.
@@ -32,18 +43,25 @@ Critter* CritterGroupGenerator::generateCritters(int waveNumber, int &numCritter
 Critter* CritterGroupGenerator::generateCritters(int waveNumber, int &numCritters, int entryX, int entryY) {
     this->waveNumber = waveNumber;
 
+    // factory to use based on wave number
+    CritterFactory* factory = nullptr;
+    if (waveNumber <= 3) {
+        factory = factories[0]; // EasyCritterFactory
+    } else if (waveNumber <= 6) {
+        factory = factories[1]; // MediumCritterFactory
+    } else {
+        factory = factories[2]; // HardCritterFactory
+    }
+
+
     numCritters = 5 + waveNumber * 2; // Generate multiple critters based on the wave.
 
     Critter* critters = new Critter[numCritters];
-    for (int i = 0; i < numCritters; i++) {
-        int hitpoints = 10 + waveNumber * 5;
-        int reward = 2 + waveNumber;
-        int strength = waveNumber + 1;
-        double speed = 0.2 + waveNumber * 0.05;
-        int level = waveNumber;
 
-        critters[i] = Critter(nextCritterId++, hitpoints, reward, strength, speed, level);
-        critters[i].setPosition(static_cast<float>(entryX), static_cast<float>(entryY)); // Set initial position
+    for (int i = 0; i < numCritters; i++) {
+        // Use the factory to create a critter
+        critters[i] = *factory->createCritter(nextCritterId++, waveNumber);
+        critters[i].setPosition(static_cast<float>(entryX), static_cast<float>(entryY));
     }
 
     return critters;
